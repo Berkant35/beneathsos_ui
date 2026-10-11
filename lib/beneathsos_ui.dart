@@ -9,3 +9,5 @@ export 'src/tokens/motion.dart';
 export 'src/tokens/sizes.dart';
 export 'src/tokens/spacing.dart';
 export 'src/tokens/typography.dart';
+export 'src/widgets/beneath_logo.dart';
+export 'src/widgets/signal_exit_painter.dart';
