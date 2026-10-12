@@ -103,6 +103,9 @@ abstract final class BeneathTheme {
           textStyle: text.labelLarge,
         ),
       ),
+      iconButtonTheme: IconButtonThemeData(
+        style: IconButton.styleFrom(minimumSize: minimum),
+      ),
       cardTheme: CardThemeData(
         color: scheme.surfaceContainer,
         shape: shape,

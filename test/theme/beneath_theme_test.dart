@@ -34,6 +34,15 @@ void _expectCommon(ThemeData theme, Color accent) {
     );
   }
   expect(theme.scaffoldBackgroundColor, s.surface);
+  final icon = theme.iconButtonTheme.style?.minimumSize?.resolve(
+    <WidgetState>{},
+  );
+  expect(
+    icon,
+    isNotNull,
+    reason: 'icon buttons (e.g. Back) need a 56 px target',
+  );
+  expect(icon!.shortestSide, greaterThanOrEqualTo(56));
 }
 
 void main() {
