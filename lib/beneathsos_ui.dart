@@ -11,6 +11,7 @@ export 'src/tokens/spacing.dart';
 export 'src/tokens/typography.dart';
 export 'src/widgets/beneath_card.dart';
 export 'src/widgets/beneath_logo.dart';
+export 'src/widgets/countdown_ring.dart';
 export 'src/widgets/primary_button.dart';
 export 'src/widgets/secondary_button.dart';
 export 'src/widgets/signal_exit_painter.dart';
