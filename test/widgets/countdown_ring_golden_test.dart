@@ -44,6 +44,13 @@ void main() {
                   ),
                 ),
               ),
+              const SizedBox(width: 16),
+              const CountdownRing(
+                total: Duration(minutes: 15),
+                remaining: Duration(minutes: 13, seconds: 5),
+                semanticLabel: '13 min 5 s',
+                size: 120,
+              ),
             ],
           ),
           brightness: brightness,

@@ -36,13 +36,19 @@ class CountdownRing extends StatelessWidget {
     return '${seconds ~/ 60}:${(seconds % 60).toString().padLeft(2, '0')}';
   }
 
+  /// [centreText] of [total] with every digit as `0` — the widest text this countdown shows, so
+  /// the number keeps one size from start to end.
+  static String _template(Duration total) =>
+      centreText(total).replaceAll(RegExp('[0-9]'), '0');
+
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     final totalMs = total.inMilliseconds;
-    final fraction = totalMs <= 0
-        ? 0.0
-        : (remaining.inMilliseconds / totalMs).clamp(0.0, 1.0);
+    final shown = totalMs <= 0
+        ? Duration.zero
+        : Duration(milliseconds: remaining.inMilliseconds.clamp(0, totalMs));
+    final fraction = totalMs <= 0 ? 0.0 : shown.inMilliseconds / totalMs;
     final style = BeneathTokens.of(context).numeric
         .copyWith(color: scheme.onSurface, fontSize: size * 0.28);
     return Semantics(
@@ -58,12 +64,24 @@ class CountdownRing extends StatelessWidget {
             showArc: !MediaQuery.disableAnimationsOf(context),
             strokeWidth: size * 12 / 160,
           ),
-          child: Padding(
-            padding: EdgeInsets.all(size * 0.2),
-            child: Center(
+          child: Center(
+            // A short line fits about 0.72 of the diameter inside the stroke.
+            child: SizedBox(
+              width: size * 0.72,
+              height: size * 0.42,
               child: FittedBox(
                 fit: BoxFit.scaleDown,
-                child: Text(centreText(remaining), style: style),
+                // The invisible template fixes the scale for the whole countdown (no jump 10 → 9).
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Visibility.maintain(
+                      visible: false,
+                      child: Text(_template(total), style: style),
+                    ),
+                    Text(centreText(shown), style: style),
+                  ],
+                ),
               ),
             ),
           ),

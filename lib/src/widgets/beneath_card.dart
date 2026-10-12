@@ -51,7 +51,8 @@ class BeneathCard extends StatelessWidget {
                 ],
                 Expanded(
                   child: Semantics(
-                    header: true,
+                    // A tappable card is a button; only a plain card's title is a heading.
+                    header: onTap == null,
                     child: Text(
                       title,
                       style: theme.textTheme.titleLarge?.copyWith(

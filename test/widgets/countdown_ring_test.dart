@@ -1,5 +1,6 @@
 import 'package:beneathsos_ui/beneathsos_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 Widget _frame(
@@ -112,24 +113,79 @@ void main() {
     handle.dispose();
   });
 
-  testWidgets('200 % text: the number shrinks to fit inside the ring', (
-    tester,
-  ) async {
-    await tester.pumpWidget(
-      _frame(
-        _ring(
-          const Duration(minutes: 13, seconds: 5),
-          total: const Duration(minutes: 15),
+  testWidgets(
+    '200 % text: the number is scaled to fit, never wrapped or clipped',
+    (tester) async {
+      await tester.pumpWidget(
+        _frame(
+          _ring(
+            const Duration(minutes: 13, seconds: 5),
+            total: const Duration(minutes: 15),
+          ),
+          textScale: 2,
         ),
-        textScale: 2,
-      ),
+      );
+      expect(tester.takeException(), isNull);
+      final paragraph = tester.renderObject<RenderParagraph>(
+        find.text('13:05'),
+      );
+      expect(
+        paragraph.size.width,
+        greaterThanOrEqualTo(
+          paragraph.getMaxIntrinsicWidth(double.infinity) - 0.5,
+        ),
+        reason: 'the number was squeezed (wrapped) instead of scaled',
+      );
+      final ring = tester.getRect(find.byType(CountdownRing));
+      final text = tester.getRect(find.text('13:05'));
+      expect(
+        ring.contains(text.topLeft) && ring.contains(text.bottomRight),
+        isTrue,
+      );
+    },
+  );
+
+  testWidgets(
+    'the number keeps one size for the whole countdown (no jump at 10 → 9)',
+    (tester) async {
+      for (final scale in [1.0, 2.0]) {
+        await tester.pumpWidget(
+          _frame(_ring(const Duration(seconds: 10)), textScale: scale),
+        );
+        final ten = tester.getRect(find.text('10')).height;
+        await tester.pumpWidget(
+          _frame(_ring(const Duration(seconds: 9)), textScale: scale),
+        );
+        expect(
+          tester.getRect(find.text('9')).height,
+          closeTo(ten, 0.5),
+          reason: 'text scale $scale',
+        );
+      }
+    },
+  );
+
+  testWidgets('minutes countdown: no jump at 1:00 → 59', (tester) async {
+    const total = Duration(minutes: 15);
+    await tester.pumpWidget(
+      _frame(_ring(const Duration(seconds: 60), total: total)),
     );
-    expect(tester.takeException(), isNull);
-    final ring = tester.getRect(find.byType(CountdownRing));
-    final text = tester.getRect(find.text('13:05'));
+    final minute = tester.getRect(find.text('1:00')).height;
+    await tester.pumpWidget(
+      _frame(_ring(const Duration(seconds: 59), total: total)),
+    );
+    expect(tester.getRect(find.text('59')).height, closeTo(minute, 0.5));
+  });
+
+  testWidgets('the number is clamped like the arc', (tester) async {
+    await tester.pumpWidget(_frame(_ring(const Duration(seconds: 20))));
+    expect(find.text('15'), findsOneWidget);
+    await tester.pumpWidget(
+      _frame(_ring(const Duration(seconds: 1), total: Duration.zero)),
+    );
     expect(
-      ring.contains(text.topLeft) && ring.contains(text.bottomRight),
-      isTrue,
-    );
+      find.text('0').hitTestable(),
+      findsOneWidget,
+    ); // the visible number, not the size template
   });
 }

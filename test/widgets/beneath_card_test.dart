@@ -99,4 +99,18 @@ void main() {
     );
     handle.dispose();
   });
+
+  testWidgets('a tappable card is a button, not a heading', (tester) async {
+    final handle = tester.ensureSemantics();
+    await tester.pumpWidget(
+      _frame(
+        BeneathCard(title: 'Open', onTap: () {}, child: const Text('Body')),
+      ),
+    );
+    expect(
+      tester.getSemantics(find.byType(BeneathCard)),
+      isSemantics(isButton: true, isHeader: false),
+    );
+    handle.dispose();
+  });
 }

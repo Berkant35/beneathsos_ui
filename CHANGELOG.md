@@ -1,3 +1,8 @@
+## 0.3.1
+- `CountdownRing`: the number keeps one size for the whole countdown (no jump at 10 → 9 or
+  1:00 → 59), uses more of the ring, and is clamped like the arc.
+- `BeneathCard`: a tappable card is a button for screen readers, not a heading.
+
 ## 0.3.0
 - `CountdownRing` (progress arc in the primary colour, tabular number, number only with
   "reduce motion").
