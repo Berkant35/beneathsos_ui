@@ -1,3 +1,4 @@
+import 'package:beneathsos_catalogue/flows/flows.dart';
 import 'package:beneathsos_catalogue/use_cases/brand.dart';
 import 'package:beneathsos_catalogue/use_cases/buttons.dart';
 import 'package:beneathsos_catalogue/use_cases/cards.dart';
@@ -27,6 +28,7 @@ List<WidgetbookNode> catalogueDirectories() => [
       scaffold,
     ],
   ),
+  flowsCategory,
 ];
 
 /// The BeneathSOS component catalogue (Widgetbook).
