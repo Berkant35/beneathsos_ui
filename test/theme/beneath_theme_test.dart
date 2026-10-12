@@ -34,6 +34,10 @@ void _expectCommon(ThemeData theme, Color accent) {
     );
   }
   expect(theme.scaffoldBackgroundColor, s.surface);
+  expect(
+    theme.primaryTextTheme.bodyLarge!.fontFamily,
+    'packages/beneathsos_ui/AtkinsonHyperlegibleNext',
+  );
   final icon = theme.iconButtonTheme.style?.minimumSize?.resolve(
     <WidgetState>{},
   );
@@ -94,5 +98,21 @@ void main() {
     );
     expect(s.outline, BeneathColors.outlineDark);
     _expectCommon(theme, BeneathColors.accentDark);
+  });
+
+  test('outlineVariant is the calm border colour', () {
+    expect(
+      BeneathTheme.light().colorScheme.outlineVariant,
+      BeneathColors.outlineVariantLight,
+    );
+    expect(
+      BeneathTheme.dark().colorScheme.outlineVariant,
+      BeneathColors.outlineVariantDark,
+    );
+  });
+
+  test('themes are stable between calls (no theme animation on rebuild)', () {
+    expect(BeneathTheme.light(), BeneathTheme.light());
+    expect(BeneathTheme.dark(), BeneathTheme.dark());
   });
 }

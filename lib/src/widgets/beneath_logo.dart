@@ -14,7 +14,8 @@ class BeneathLogo extends StatelessWidget {
   }) : _lockup = false;
 
   /// Symbol + "Beneath" + "SOS", [height] tall. The wordmark ignores system text scaling; the
-  /// whole lock-up scales down to fit a narrow space instead of overflowing.
+  /// whole lock-up scales down to fit a narrow space instead of overflowing. Proportions follow
+  /// `tools/brand/brandkit/wordmark.py` in the hub: gap ¼ and wordmark ½ of the height.
   const BeneathLogo.lockup({
     required this.semanticLabel,
     double height = 48,
@@ -45,7 +46,7 @@ class BeneathLogo extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 symbol,
-                SizedBox(width: size * 0.2),
+                SizedBox(width: size * 0.25),
                 Text.rich(
                   TextSpan(
                     children: [
@@ -64,7 +65,7 @@ class BeneathLogo extends StatelessWidget {
                     fontFamily: beneathFontFamily,
                     package: beneathFontPackage,
                     fontWeight: FontWeight.w800,
-                    fontSize: size * 0.6,
+                    fontSize: size * 0.5,
                     height: 1,
                   ),
                 ),

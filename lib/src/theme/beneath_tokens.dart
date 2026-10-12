@@ -50,6 +50,16 @@ class BeneathTokens extends ThemeExtension<BeneathTokens> {
       : BeneathMotion.standard;
 
   @override
+  bool operator ==(Object other) =>
+      other is BeneathTokens &&
+      other.accent == accent &&
+      other.onAccent == onAccent &&
+      other.numeric == numeric;
+
+  @override
+  int get hashCode => Object.hash(accent, onAccent, numeric);
+
+  @override
   BeneathTokens copyWith({
     Color? accent,
     Color? onAccent,

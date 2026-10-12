@@ -112,4 +112,29 @@ void main() {
     expect(a.shouldRepaint(b), isFalse);
     expect(a.shouldRepaint(c), isTrue);
   });
+
+  testWidgets('lock-up proportions follow the brand source', (tester) async {
+    await tester.pumpWidget(
+      goldenFrame(
+        const BeneathLogo.lockup(semanticLabel: 'BeneathSOS'),
+        brightness: Brightness.light,
+      ),
+    );
+    final gap = tester.widget<SizedBox>(
+      find
+          .descendant(
+            of: find.byType(BeneathLogo),
+            matching: find.byType(SizedBox),
+          )
+          .first,
+    );
+    expect(gap.width, 12); // height 48 / 4
+    final text = tester.widget<RichText>(
+      find.descendant(
+        of: find.byType(BeneathLogo),
+        matching: find.byType(RichText),
+      ),
+    );
+    expect(text.text.style!.fontSize, 24); // height 48 / 2
+  });
 }

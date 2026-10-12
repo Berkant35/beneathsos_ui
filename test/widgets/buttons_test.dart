@@ -123,4 +123,18 @@ void main() {
       BeneathColors.textDark,
     );
   });
+
+  testWidgets('both buttons draw 24 px icons', (tester) async {
+    await tester.pumpWidget(
+      _frame(PrimaryButton(label: 'Start', onPressed: () {})),
+    );
+    expect(_style<FilledButton>(tester).iconSize!.resolve(<WidgetState>{}), 24);
+    await tester.pumpWidget(
+      _frame(SecondaryButton(label: 'Trapped', onPressed: () {})),
+    );
+    expect(
+      _style<OutlinedButton>(tester).iconSize!.resolve(<WidgetState>{}),
+      24,
+    );
+  });
 }

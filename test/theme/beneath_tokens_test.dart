@@ -54,4 +54,10 @@ void main() {
       throwsA(isA<StateError>()),
     );
   });
+
+  test('tokens with equal values are equal', () {
+    expect(BeneathTokens.light(), BeneathTokens.light());
+    expect(BeneathTokens.light().hashCode, BeneathTokens.light().hashCode);
+    expect(BeneathTokens.light(), isNot(BeneathTokens.dark()));
+  });
 }

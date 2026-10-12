@@ -28,6 +28,7 @@ class SecondaryButton extends StatelessWidget {
     final style = OutlinedButton.styleFrom(
       backgroundColor: scheme.surfaceContainer,
       foregroundColor: light ? scheme.primary : scheme.onSurface,
+      iconSize: 24,
       side: BorderSide(
         color: light ? scheme.primary : scheme.outline,
         width: 1.5,

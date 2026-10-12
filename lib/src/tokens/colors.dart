@@ -48,6 +48,12 @@ abstract final class BeneathColors {
   /// Borders in the dark theme (≥ 3:1 on its surfaces).
   static const Color outlineDark = Color(0xFF8C9AB8);
 
+  /// Calm borders and dividers in the light theme (decorative; never carries information).
+  static const Color outlineVariantLight = Color(0xFFD5DAE5);
+
+  /// Calm borders and dividers in the dark theme (decorative; never carries information).
+  static const Color outlineVariantDark = Color(0xFF33456A);
+
   /// White.
   static const Color white = Color(0xFFFFFFFF);
 }

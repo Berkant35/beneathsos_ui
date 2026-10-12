@@ -28,6 +28,7 @@ class PrimaryButton extends StatelessWidget {
     final style = FilledButton.styleFrom(
       backgroundColor: tokens.accent,
       foregroundColor: tokens.onAccent,
+      iconSize: 24,
       minimumSize: const Size.fromHeight(BeneathSizes.primaryButtonHeight),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(BeneathSizes.radius),

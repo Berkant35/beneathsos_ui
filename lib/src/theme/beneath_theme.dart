@@ -6,11 +6,14 @@ import 'package:flutter/material.dart';
 
 /// The BeneathSOS light and dark themes. Apps pass both and follow the system setting.
 abstract final class BeneathTheme {
-  /// Light theme.
-  static ThemeData light() => _build(_light, BeneathTokens.light());
+  /// Light theme (one instance, so rebuilds never animate between equal themes).
+  static ThemeData light() => _lightTheme;
 
-  /// Dark theme.
-  static ThemeData dark() => _build(_dark, BeneathTokens.dark());
+  /// Dark theme (one instance).
+  static ThemeData dark() => _darkTheme;
+
+  static final ThemeData _lightTheme = _build(_light, BeneathTokens.light());
+  static final ThemeData _darkTheme = _build(_dark, BeneathTokens.dark());
 
   // secondary and tertiary are navy on purpose: no built-in widget may paint orange text or icons.
   static const ColorScheme _light = ColorScheme(
@@ -31,6 +34,7 @@ abstract final class BeneathTheme {
     surfaceContainerHigh: BeneathColors.white,
     surfaceContainerHighest: BeneathColors.white,
     outline: BeneathColors.outlineLight,
+    outlineVariant: BeneathColors.outlineVariantLight,
   );
 
   static const ColorScheme _dark = ColorScheme(
@@ -51,6 +55,7 @@ abstract final class BeneathTheme {
     surfaceContainerHigh: BeneathColors.surface2Dark,
     surfaceContainerHighest: BeneathColors.surface2Dark,
     outline: BeneathColors.outlineDark,
+    outlineVariant: BeneathColors.outlineVariantDark,
   );
 
   static ThemeData _build(ColorScheme scheme, BeneathTokens tokens) {
@@ -66,6 +71,7 @@ abstract final class BeneathTheme {
       colorScheme: scheme,
       scaffoldBackgroundColor: scheme.surface,
       textTheme: text,
+      primaryTextTheme: text,
       materialTapTargetSize: MaterialTapTargetSize.padded,
       extensions: [tokens],
       appBarTheme: AppBarTheme(
