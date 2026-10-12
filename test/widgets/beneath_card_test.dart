@@ -87,4 +87,16 @@ void main() {
     );
     handle.dispose();
   });
+
+  testWidgets('the title is a heading for screen readers', (tester) async {
+    final handle = tester.ensureSemantics();
+    await tester.pumpWidget(
+      _frame(const BeneathCard(title: 'Being prepared', child: Text('Body'))),
+    );
+    expect(
+      tester.getSemantics(find.text('Being prepared')),
+      isSemantics(label: 'Being prepared', isHeader: true),
+    );
+    handle.dispose();
+  });
 }

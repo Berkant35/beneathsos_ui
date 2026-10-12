@@ -50,10 +50,13 @@ class BeneathCard extends StatelessWidget {
                   const SizedBox(width: BeneathSpacing.sm),
                 ],
                 Expanded(
-                  child: Text(
-                    title,
-                    style: theme.textTheme.titleLarge?.copyWith(
-                      color: scheme.primary,
+                  child: Semantics(
+                    header: true,
+                    child: Text(
+                      title,
+                      style: theme.textTheme.titleLarge?.copyWith(
+                        color: scheme.primary,
+                      ),
                     ),
                   ),
                 ),
