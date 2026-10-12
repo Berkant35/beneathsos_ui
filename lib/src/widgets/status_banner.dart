@@ -105,6 +105,14 @@ class StatusBanner extends StatelessWidget {
         button: tap != null,
         child: AnimatedSwitcher(
           duration: BeneathTokens.motionOf(context).medium,
+          // The fading-out message is hidden from screen readers, so only the new one is heard.
+          layoutBuilder: (current, previous) => Stack(
+            alignment: Alignment.center,
+            children: [
+              ...previous.map((child) => ExcludeSemantics(child: child)),
+              ?current,
+            ],
+          ),
           child: banner,
         ),
       ),

@@ -183,4 +183,25 @@ void main() {
       Duration.zero,
     );
   });
+
+  testWidgets(
+    'during the cross-fade screen readers hear only the new message',
+    (tester) async {
+      final handle = tester.ensureSemantics();
+      await tester.pumpWidget(
+        _frame(const StatusBanner(kind: StatusKind.ready, message: 'Ready.')),
+      );
+      await tester.pumpWidget(
+        _frame(const StatusBanner(kind: StatusKind.blocked, message: 'Off.')),
+      );
+      await tester.pump(
+        const Duration(milliseconds: 50),
+      ); // mid-fade: both children are painted
+      expect(
+        tester.getSemantics(find.byType(StatusBanner)),
+        isSemantics(label: 'Off.'),
+      );
+      handle.dispose();
+    },
+  );
 }
