@@ -1,3 +1,9 @@
+## 0.3.0
+- `CountdownRing` (progress arc in the primary colour, tabular number, number only with
+  "reduce motion").
+- `BeneathScaffold` (moved from the app's `AppScaffold`).
+- `BeneathCard` titles are headings for screen readers.
+
 ## 0.2.1
 - `StatusBanner`: screen readers hear only the new message during the cross-fade (the
   outgoing one is excluded from semantics).
