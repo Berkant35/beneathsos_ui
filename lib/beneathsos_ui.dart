@@ -10,4 +10,6 @@ export 'src/tokens/sizes.dart';
 export 'src/tokens/spacing.dart';
 export 'src/tokens/typography.dart';
 export 'src/widgets/beneath_logo.dart';
+export 'src/widgets/primary_button.dart';
+export 'src/widgets/secondary_button.dart';
 export 'src/widgets/signal_exit_painter.dart';

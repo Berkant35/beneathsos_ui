@@ -16,6 +16,19 @@ Future<void> loadBeneathFont() async {
     loader.addFont(Future.value(ByteData.sublistView(bytes)));
   }
   await loader.load();
+  await _loadMaterialIcons();
+}
+
+/// Material icons from the Flutter SDK, so icons in goldens are glyphs rather than boxes.
+Future<void> _loadMaterialIcons() async {
+  final root = Platform.environment['FLUTTER_ROOT'];
+  final font = File(
+    '$root/bin/cache/artifacts/material_fonts/MaterialIcons-Regular.otf',
+  );
+  if (root == null || !font.existsSync()) return;
+  final loader = FontLoader('MaterialIcons')
+    ..addFont(Future.value(ByteData.sublistView(font.readAsBytesSync())));
+  await loader.load();
 }
 
 /// [child] on the theme background, padded, inside a RepaintBoundary keyed [goldenKey].
