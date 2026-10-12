@@ -13,3 +13,4 @@ export 'src/widgets/beneath_logo.dart';
 export 'src/widgets/primary_button.dart';
 export 'src/widgets/secondary_button.dart';
 export 'src/widgets/signal_exit_painter.dart';
+export 'src/widgets/status_banner.dart';

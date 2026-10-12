@@ -62,6 +62,12 @@ void main() {
         BeneathColors.backgroundDark,
         8.1,
       ),
+      (
+        'text on surface container (ready banner, card)',
+        BeneathColors.textLight,
+        BeneathColors.white,
+        17.4,
+      ),
     ];
     for (final (name, fg, bg, expected) in cases) {
       test(name, () => expect(_rounded(fg, bg), expected));
