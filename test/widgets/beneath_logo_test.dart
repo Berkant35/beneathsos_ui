@@ -76,6 +76,26 @@ void main() {
     },
   );
 
+  testWidgets(
+    'the lock-up scales down instead of overflowing in a narrow space',
+    (tester) async {
+      await tester.pumpWidget(
+        goldenFrame(
+          const SizedBox(
+            width: 120,
+            child: BeneathLogo.lockup(semanticLabel: 'BeneathSOS'),
+          ),
+          brightness: Brightness.light,
+        ),
+      );
+      expect(tester.takeException(), isNull);
+      expect(
+        tester.getSize(find.byType(BeneathLogo)).width,
+        lessThanOrEqualTo(120),
+      );
+    },
+  );
+
   test('repaints only when a colour changes', () {
     const a = SignalExitPainter(
       line: BeneathColors.primaryLight,

@@ -13,7 +13,8 @@ class BeneathLogo extends StatelessWidget {
     super.key,
   }) : _lockup = false;
 
-  /// Symbol + "Beneath" + "SOS", [height] tall. The wordmark ignores system text scaling.
+  /// Symbol + "Beneath" + "SOS", [height] tall. The wordmark ignores system text scaling; the
+  /// whole lock-up scales down to fit a narrow space instead of overflowing.
   const BeneathLogo.lockup({
     required this.semanticLabel,
     double height = 48,
@@ -38,34 +39,37 @@ class BeneathLogo extends StatelessWidget {
       painter: SignalExitPainter(line: primary, accent: accent),
     );
     final Widget logo = _lockup
-        ? Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              symbol,
-              SizedBox(width: size * 0.2),
-              Text.rich(
-                TextSpan(
-                  children: [
-                    TextSpan(
-                      text: 'Beneath',
-                      style: TextStyle(color: primary),
-                    ),
-                    TextSpan(
-                      text: 'SOS',
-                      style: TextStyle(color: accent),
-                    ),
-                  ],
+        ? FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                symbol,
+                SizedBox(width: size * 0.2),
+                Text.rich(
+                  TextSpan(
+                    children: [
+                      TextSpan(
+                        text: 'Beneath',
+                        style: TextStyle(color: primary),
+                      ),
+                      TextSpan(
+                        text: 'SOS',
+                        style: TextStyle(color: accent),
+                      ),
+                    ],
+                  ),
+                  textScaler: TextScaler.noScaling,
+                  style: TextStyle(
+                    fontFamily: beneathFontFamily,
+                    package: beneathFontPackage,
+                    fontWeight: FontWeight.w800,
+                    fontSize: size * 0.6,
+                    height: 1,
+                  ),
                 ),
-                textScaler: TextScaler.noScaling,
-                style: TextStyle(
-                  fontFamily: beneathFontFamily,
-                  package: beneathFontPackage,
-                  fontWeight: FontWeight.w800,
-                  fontSize: size * 0.6,
-                  height: 1,
-                ),
-              ),
-            ],
+              ],
+            ),
           )
         : symbol;
     return Semantics(
