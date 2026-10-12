@@ -49,7 +49,7 @@ class CatalogueApp extends StatelessWidget {
         themes: [_light, _dark],
         initialTheme: dark ? _dark : _light,
       ),
-      TextScaleAddon(min: 1, max: 2, divisions: 2),
+      TextScaleAddon(min: 1, divisions: 2),
       ViewportAddon(const [
         ViewportData(
           name: 'Small phone 375 × 667',

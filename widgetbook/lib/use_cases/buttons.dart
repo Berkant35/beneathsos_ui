@@ -22,6 +22,13 @@ final primaryButton = WidgetbookComponent(
       ),
     ),
     WidgetbookUseCase(
+      name: 'Without icon',
+      builder: (context) => frame(
+        context,
+        PrimaryButton(label: 'Start a search', onPressed: () {}),
+      ),
+    ),
+    WidgetbookUseCase(
       name: 'Disabled',
       builder: (context) => frame(
         context,
@@ -44,6 +51,17 @@ final secondaryButton = WidgetbookComponent(
             label: 'Label',
             initialValue: 'I am trapped',
           ),
+          onPressed: () {},
+        ),
+      ),
+    ),
+    WidgetbookUseCase(
+      name: 'With icon',
+      builder: (context) => frame(
+        context,
+        SecondaryButton(
+          label: 'Open settings',
+          icon: Icons.settings_rounded,
           onPressed: () {},
         ),
       ),
