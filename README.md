@@ -20,6 +20,11 @@ MaterialApp(theme: BeneathTheme.light(), darkTheme: BeneathTheme.dark(), ...);
 - Design guidance: [`docs/design/`](https://github.com/Berkant35/beneathsos/tree/main/docs/design)
   and [ADR 0018](https://github.com/Berkant35/beneathsos/blob/main/docs/adr/0018-design-system-material-theme.md).
 
+## Catalogue
+Every component in light and dark, at 100–200 % text size, with knobs:
+`cd widgetbook && fvm flutter run -d chrome` (or `fvm flutter build web`). The catalogue is a separate
+app (`widgetbook/`) and is not part of the published package.
+
 ## Development
 - Fonts are generated in the hub: `tools/brand/build.py --fonts-dir packages/beneathsos_ui/fonts`.
 - Golden tests (tag `golden`) run on macOS: `fvm flutter test --tags golden`;
