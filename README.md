@@ -15,6 +15,8 @@ MaterialApp(theme: BeneathTheme.light(), darkTheme: BeneathTheme.dark(), ...);
 - Colours come from the theme. Orange (`BeneathTokens.accent`) is a fill behind dark content only;
   never orange text or icons on a light background.
 - At most one `PrimaryButton` per screen, in the bottom half.
+- Use `StatusBanner` for state — what happened, then what to do; `blocked` (red) only when something
+  blocks the task. Every kind has its own icon, never colour alone.
 - Design guidance: [`docs/design/`](https://github.com/Berkant35/beneathsos/tree/main/docs/design)
   and [ADR 0018](https://github.com/Berkant35/beneathsos/blob/main/docs/adr/0018-design-system-material-theme.md).
 
