@@ -1,3 +1,4 @@
+import 'package:beneathsos_catalogue/catalogue_home.dart';
 import 'package:beneathsos_catalogue/flows/flows.dart';
 import 'package:beneathsos_catalogue/use_cases/brand.dart';
 import 'package:beneathsos_catalogue/use_cases/buttons.dart';
@@ -45,6 +46,7 @@ class CatalogueApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Widgetbook.material(
     initialRoute: initialRoute,
+    home: const CatalogueHome(),
     directories: catalogueDirectories(),
     addons: [
       MaterialThemeAddon(

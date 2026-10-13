@@ -36,6 +36,15 @@ void main() {
     );
   });
 
+  testWidgets(
+    'the catalogue opens on the BeneathSOS home, not a marketing page',
+    (tester) async {
+      await tester.pumpWidget(const CatalogueApp());
+      await tester.pumpAndSettle();
+      expect(find.text('BeneathSOS UI catalogue'), findsOneWidget);
+    },
+  );
+
   for (final path in _useCasePaths()) {
     for (final dark in [false, true]) {
       testWidgets('$path renders (${dark ? 'dark' : 'light'})', (tester) async {

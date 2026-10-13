@@ -23,4 +23,24 @@ jobs:
       - run: dart format --set-exit-if-changed .
       - run: flutter analyze --fatal-infos
       - run: flutter test
-      - run: flutter build web --release
+      # No CDN: CanvasKit and the app's resources come from the site itself.
+      - run: flutter build web --release --no-web-resources-cdn --base-href /beneathsos_ui/
+      - if: github.event_name == 'push'
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: widgetbook/build/web
+  # Publishes the catalogue to https://berkant35.github.io/beneathsos_ui/ from main only.
+  deploy:
+    if: github.event_name == 'push'
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

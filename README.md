@@ -21,8 +21,10 @@ MaterialApp(theme: BeneathTheme.light(), darkTheme: BeneathTheme.dark(), ...);
   and [ADR 0018](https://github.com/Berkant35/beneathsos/blob/main/docs/adr/0018-design-system-material-theme.md).
 
 ## Catalogue
-Every component in light and dark, at 100–200 % text size, with knobs:
-`cd widgetbook && fvm flutter run -d chrome` (or `fvm flutter build web`). The catalogue is a separate
+**Live: <https://berkant35.github.io/beneathsos_ui/>** (published from `main`). Every component in light
+and dark, at 100–200 % text size, with knobs. Locally: `cd widgetbook && fvm flutter run -d chrome`.
+The site loads nothing from a CDN; only a glyph missing from the bundled fonts (e.g. an emoji) would make
+the Flutter engine fetch a fallback font from Google Fonts. The catalogue is a separate
 app (`widgetbook/`) and is not part of the published package.
 
 ## Development
